@@ -11,6 +11,10 @@ export default function Form() {
       .string()
       .oneOf([yup.ref("password"), null],"Passwords Don't Match")
       .required(),
+      accountType: yup
+      .string("account type should be a string")
+      .oneOf(["personal", "commercial"])
+      .required("account type is required"),
     });
     const { register, handleSubmit,formState:{errors} } = useForm({
       resolver: yupResolver(schema),
@@ -21,6 +25,11 @@ export default function Form() {
   };
   return (
     <>
+         {/* {errors.email ? (
+            <span className="text-red-900">{errors.email.message}</span>
+          ) : (
+            <></>
+          )} */}
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <input
           type="text"
